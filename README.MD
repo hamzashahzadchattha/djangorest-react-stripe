@@ -90,17 +90,15 @@ To provide a comprehensive and interactive API documentation, this project uses 
 
 ### Setup `drf_yasg`
 
-1. **Install `drf_yasg`**:
-
-  ```sh
+1. Install `drf_yasg`:
   pip install drf-yasg
-2. **Update settings.py: Add drf_yasg to your INSTALLED_APPS:**
+2. Update settings.py: Add drf_yasg to your INSTALLED_APPS
     INSTALLED_APPS = [
         ...
         'drf_yasg',
         ...
     ]
-3. **Configure URL Patterns: In your urls.py, add the following configurations to include the Swagger UI **
+3. Configure URL Patterns: In your urls.py, add the following configurations to include the Swagger UI 
     from rest_framework import permissions
     from drf_yasg.views import get_schema_view
     from drf_yasg import openapi
@@ -120,7 +118,7 @@ To provide a comprehensive and interactive API documentation, this project uses 
         ...
     ]
 
-4. **Annotate Views: Use @swagger_auto_schema decorator to annotate your views for better documentation. Here is an example for a token refresh view:**
+4. Annotate Views: Use @swagger_auto_schema decorator to annotate your views for better documentation. Here is an example for a token refresh view:
     from drf_yasg.utils import swagger_auto_schema
     from drf_yasg import openapi
 
