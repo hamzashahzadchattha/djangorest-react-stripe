@@ -81,3 +81,58 @@ Note:
 - Review how the frontend and stripe subscriptions are working
 - Add Swagger or Redoc API documentation for Django restful API endpoints (Write down well-organized and well-documented API reference)
 - Create a new repository to your personal git and commit the result.
+
+# Django REST Project Documentation
+
+## Swagger Documentation Using `drf_yasg`
+
+To provide a comprehensive and interactive API documentation, I used `drf_yasg`. Below is the process to set up and use `drf_yasg` for generating Swagger documentation.
+
+## Below is POSTMAN Api collection and Environmental Variables For This Project.
+ 
+### API Collection
+  https://api.postman.com/collections/35060703-ebd9206f-b491-45ad-918e-5487ee9cc76b?access_key=PMAT-01J0157EFM9C31BTKYQFXDS1N3
+
+### Environment
+
+
+    {
+	"id": "ea9da2ad-f7fe-4455-899c-e92c6c4b7641",
+	"name": "django_subscription_app_env_local",
+	"values": [
+		{
+			"key": "Base_URL",
+			"value": "http://127.0.0.1:8000",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "AccessToekn",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "RefreshToken",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "CsrfToken",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "X-CSRFToken",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2024-06-10T13:27:01.780Z",
+	"_postman_exported_using": "Postman/11.1.25"
+}
+
