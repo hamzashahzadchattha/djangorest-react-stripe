@@ -20,13 +20,13 @@ env = environ.Env(
 )
 environ.Env.read_env()
 
-STRIPE_SECRET_KEY=env('STRIPE_SECRET_KEY')
-WORLD_INDIVIDUAL=env('WORLD_INDIVIDUAL')
-WORLD_GROUP=env('WORLD_GROUP')
-WORLD_BUSINESS=env('WORLD_BUSINESS')
-UNIVERSE_INDIVIDUAL=env('UNIVERSE_INDIVIDUAL')
-UNIVERSE_GROUP=env('UNIVERSE_GROUP')
-UNIVERSE_BUSINESS=env('UNIVERSE_BUSINESS')
+STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
+WORLD_INDIVIDUAL = env('WORLD_INDIVIDUAL')
+WORLD_GROUP = env('WORLD_GROUP')
+WORLD_BUSINESS = env('WORLD_BUSINESS')
+UNIVERSE_INDIVIDUAL = env('UNIVERSE_INDIVIDUAL')
+UNIVERSE_GROUP = env('UNIVERSE_GROUP')
+UNIVERSE_BUSINESS = env('UNIVERSE_BUSINESS')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -53,11 +53,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     # Modules
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
+    'drf_yasg',
 
     # Apps
     'user',
@@ -200,12 +201,12 @@ SIMPLE_JWT = {
     # A string like "example.com", or None for standard domain cookie.
     'AUTH_COOKIE_DOMAIN': None,
     # Whether the auth cookies should be secure (https:// only).
-    'AUTH_COOKIE_SECURE': True, 
+    'AUTH_COOKIE_SECURE': True,
     # Http only cookie flag.It's not fetch by javascript.
     'AUTH_COOKIE_HTTP_ONLY': True,
     'AUTH_COOKIE_PATH': '/',        # The path of the auth cookie.
     # Whether to set the flag restricting cookie leaks on cross-site requests. This can be 'Lax', 'Strict', or None to disable the flag.
-    'AUTH_COOKIE_SAMESITE': "None", # TODO: Modify to Lax
+    'AUTH_COOKIE_SAMESITE': "None",  # TODO: Modify to Lax
 }
 
 
