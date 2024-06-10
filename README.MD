@@ -86,7 +86,102 @@ Note:
 
 ## Swagger Documentation Using `drf_yasg`
 
-To provide a comprehensive and interactive API documentation, I used `drf_yasg`. Below is the process to set up and use `drf_yasg` for generating Swagger documentation.
+To provide a comprehensive and interactive API documentation, this project uses `drf_yasg`. Below is the process to set up and use `drf_yasg` for generating Swagger documentation.
+
+### Setup `drf_yasg`
+
+1. **Install `drf_yasg`**:
+
+  ```sh
+  pip install drf-yasg
+2. **Update settings.py: Add drf_yasg to your INSTALLED_APPS:**
+    ```sh
+    INSTALLED_APPS = [
+        ...
+        'drf_yasg',
+        ...
+    ]
+3. **Configure URL Patterns: In your urls.py, add the following configurations to include the Swagger UI **
+    ```sh
+    from rest_framework import permissions
+    from drf_yasg.views import get_schema_view
+    from drf_yasg import openapi
+
+    schema_view = swagger_get_schema_view(
+    openapi.Info(
+        title="Django Subscriptions API",
+        default_version='v1',
+        description="Subscriptions API",
+    ),
+    public=True,
+    )
+
+    urlpatterns = [
+        ...
+        path('/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+        ...
+    ]
+
+4. **Annotate Views: Use @swagger_auto_schema decorator to annotate your views for better documentation. Here is an example for a token refresh view:**
+    ```sh
+    from drf_yasg.utils import swagger_auto_schema
+    from drf_yasg import openapi
+
+    class CookieTokenRefreshView(jwt_views.TokenRefreshView):
+        serializer_class = CookieTokenRefreshSerializer
+
+        @swagger_auto_schema(
+            operation_description="Refresh the access token using the refresh token from the cookie.",
+            manual_parameters=[
+                openapi.Parameter(
+                    'Authorization', openapi.IN_HEADER,
+                    description="Bearer token containing the JWT access token",
+                    type=openapi.TYPE_STRING,
+                    required=True,
+                    default='Bearer ',
+                    examples={'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'}
+                ),
+                openapi.Parameter(
+                    'X-CSRFToken', openapi.IN_HEADER,
+                    description="X-CSRFToken for protection against cross-site request forgery.",
+                    type=openapi.TYPE_STRING,
+                    required=True
+                ),
+                openapi.Parameter(
+                    'access', openapi.IN_HEADER,
+                    description="access (sent in cookies, but documented here for visibility: access=value)",
+                    type=openapi.TYPE_STRING,
+                    required=True
+                ),
+                openapi.Parameter(
+                    'refresh', openapi.IN_HEADER,
+                    description="refresh (sent in cookies, but documented here for visibility: refresh=value)",
+                    type=openapi.TYPE_STRING,
+                    required=True
+                ),
+                openapi.Parameter(
+                    'csrftoken', openapi.IN_HEADER,
+                    description="csrftoken (sent in cookies, but documented here for visibility: csrftoken=value)",
+                    type=openapi.TYPE_STRING,
+                    required=True
+                ),
+            ],
+            responses={
+                200: openapi.Response('New tokens', openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'access': openapi.Schema(type=openapi.TYPE_STRING, description='New JWT access token'),
+                    }
+                )),
+                401: openapi.Response(description="Invalid or missing refresh token"),
+            },
+            tags=['Authentication']
+        )
+        def post(self, request, *args, **kwargs):
+            return super().post(request, *args, **kwargs)
+
+
+
 
 ## Below is POSTMAN Api collection and Environmental Variables For This Project.
  
@@ -134,5 +229,5 @@ To provide a comprehensive and interactive API documentation, I used `drf_yasg`.
 	"_postman_variable_scope": "environment",
 	"_postman_exported_at": "2024-06-10T13:27:01.780Z",
 	"_postman_exported_using": "Postman/11.1.25"
-}
+    }
 
